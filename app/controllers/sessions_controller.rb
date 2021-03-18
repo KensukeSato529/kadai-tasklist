@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :require_task_logged_in, only: [:index, :show]
+  
   def new
   end
 
@@ -31,6 +33,12 @@ class SessionsController < ApplicationController
     else
       # ログイン失敗
       return false
+    end
+  end
+  
+  def require_user_logged_in
+    unless logged_in?
+      redirect_to login_url
     end
   end
 end
