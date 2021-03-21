@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  before_action :require_task_logged_in, only: [:index, :show]
   
   def new
   end
@@ -40,5 +39,13 @@ class SessionsController < ApplicationController
     unless logged_in?
       redirect_to login_url
     end
+  end
+  
+  def current_task
+    @current_task ||= Task.find_by(id: session[:task_id])
+  end
+  
+  def logged_in?
+    !!current_task
   end
 end
