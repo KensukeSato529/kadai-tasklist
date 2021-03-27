@@ -9,8 +9,4 @@ class ApplicationController < ActionController::Base
           redirect_to login_url
         end
     end
-    
-    def counts(task)
-      @count_tasks = user.tasks.count
-    end
 end

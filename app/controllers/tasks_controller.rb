@@ -3,7 +3,6 @@ class TasksController < ApplicationController
   before_action :correct_user, only: [:edit, :show, :update, :destroy]
   def index
     if logged_in?
-      @user = current_user
       @tasks = current_user.tasks.order(id: :desc).page(params[:page]).per(3)
     end
   end
@@ -16,7 +15,6 @@ class TasksController < ApplicationController
   end
   
   def create
-    @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = 'タスクが正常に投稿されました'
       redirect_to @task
