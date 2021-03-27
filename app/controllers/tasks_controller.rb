@@ -2,9 +2,7 @@ class TasksController < ApplicationController
   before_action :require_task_logged_in
   before_action :correct_user, only: [:edit, :show, :update, :destroy]
   def index
-    if logged_in?
-      @tasks = current_user.tasks.order(id: :desc).page(params[:page]).per(3)
-    end
+    @tasks = current_user.tasks.order(id: :desc).page(params[:page]).per(3)
   end
   
   def show
@@ -20,7 +18,6 @@ class TasksController < ApplicationController
       flash[:success] = 'タスクが正常に投稿されました'
       redirect_to @task
     else
-      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'タスクの投稿に失敗しました。'
       render :new
     end
