@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   
   resources :tasks
   
-  resources :user
+  resources :users, only: [:index, :show, :new, :create]
 end
